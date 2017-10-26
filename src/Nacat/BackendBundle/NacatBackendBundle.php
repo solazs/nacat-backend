@@ -1,6 +1,6 @@
 <?php
 
-namespace Nacat\Backend;
+namespace Nacat\BackendBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

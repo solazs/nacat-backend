@@ -22,3 +22,14 @@ parameters:
         -
             dsn: localhost
             port: 11211
+
+    qurep_entities:
+        -
+            entity_name: posts
+            class: Nacat\DataBundle\Entity\Post
+        -
+            entity_name: categories
+            class: Nacat\DataBundle\Entity\Category
+        -
+            entity_name: editors
+            class: Nacat\DataBundle\Entity\Editor

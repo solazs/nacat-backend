@@ -1,6 +1,6 @@
 <?php
 
-namespace Nacat\Data;
+namespace Nacat\DataBundle;
 
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;

@@ -15,10 +15,11 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Nacat\Data\NacatDataBundle(),
+            new Nacat\DataBundle\NacatDataBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Solazs\QuReP\ApiBundle\QuRePApiBundle(),
-            new Nacat\Backend\NacatBackendBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new Nacat\BackendBundle\NacatBackendBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
