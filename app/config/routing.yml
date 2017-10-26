@@ -1,0 +1,4 @@
+qurep:
+    resource: "@Nacat/Backend/Controller/"
+    type:     annotation
+    prefix:   /api/v1/
