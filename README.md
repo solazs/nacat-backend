@@ -1,7 +1,13 @@
 nacat-backend
 =============
 
-A Symfony project created on October 23, 2017, 3:01 pm.
+Nacat utilizes [QuReP](https://github.com/solazs/qurep) to provide the API.
 
-note to self: 
-https://symfony.com/doc/current/bundles/FOSUserBundle/command_line_tools.html
+[FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle) is used for basic user management.
+Note: registration is enabled for editors only.
+
+The `nacat:editor:create` command may be used to add editors without logging in first.
+ 
+
+[LexikJWTAuthenticationBundle](https://github.com/lexik/LexikJWTAuthenticationBundle) is used to provide JWT Authentication.
+
