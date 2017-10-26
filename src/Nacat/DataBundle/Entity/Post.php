@@ -3,6 +3,9 @@
 namespace Nacat\DataBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Solazs\QuReP\ApiBundle\Annotations\Entity\Field;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * Post
@@ -18,6 +21,7 @@ class Post
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Field
      */
     private $id;
 
@@ -25,13 +29,22 @@ class Post
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @NotBlank()
+     * @Length(min="3", max="255",
+     *     minMessage="Title must be at least 3 characters long",
+     *     maxMessage="Title must be maximum 255 characters long")
+     * @Field(type="TextType")
      */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="subTitle", type="string", length=255)
+     * @ORM\Column(name="subTitle", type="string", length=255, nullable=true)
+     * @Length(min="3", max="255",
+     *     minMessage="Subtitle must be at least 3 characters long",
+     *     maxMessage="Subtitle must be maximum 255 characters long")
+     * @Field(type="TextType")
      */
     private $subTitle;
 
@@ -39,6 +52,7 @@ class Post
      * @var string
      *
      * @ORM\Column(name="content", type="text")
+     * @Field(type="TextareaType")
      */
     private $content;
 
@@ -46,6 +60,7 @@ class Post
      * @var \DateTime
      *
      * @ORM\Column(name="activationDate", type="datetime")
+     * @Field(type="DateTimeType")
      */
     private $activationDate;
 
@@ -53,8 +68,9 @@ class Post
      * @var \DateTime
      *
      * @ORM\Column(name="activeUntil", type="datetime", nullable=true)
+     * @Field(type="DateTimeType")
      */
-    private $activeUntil;
+    private $disableDate;
 
 
     /**
@@ -164,27 +180,27 @@ class Post
     }
 
     /**
-     * Set activeUntil
+     * Set disableDate
      *
-     * @param \DateTime $activeUntil
+     * @param \DateTime $disableDate
      *
      * @return Post
      */
-    public function setActiveUntil($activeUntil)
+    public function setDisableDate($disableDate)
     {
-        $this->activeUntil = $activeUntil;
+        $this->disableDate = $disableDate;
 
         return $this;
     }
 
     /**
-     * Get activeUntil
+     * Get disableDate
      *
      * @return \DateTime
      */
-    public function getActiveUntil()
+    public function getDisableDate()
     {
-        return $this->activeUntil;
+        return $this->disableDate;
     }
 }
 

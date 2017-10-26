@@ -3,6 +3,9 @@
 namespace Nacat\DataBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Solazs\QuReP\ApiBundle\Annotations\Entity\Field;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * Category
@@ -18,6 +21,7 @@ class Category
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Field
      */
     private $id;
 
@@ -25,6 +29,11 @@ class Category
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @NotBlank()
+     * @Length(min="3", max="255",
+     *     minMessage="Category name must be at least 3 characters long",
+     *     maxMessage="Category name must be maximum 255 characters long")
+     * @Field(type="TextType")
      */
     private $name;
 
@@ -32,6 +41,7 @@ class Category
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
+     * @Field(type="TextareaType")
      */
     private $description;
 
