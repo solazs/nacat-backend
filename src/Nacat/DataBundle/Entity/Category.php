@@ -2,6 +2,7 @@
 
 namespace Nacat\DataBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Solazs\QuReP\ApiBundle\Annotations\Entity\Field;
 use Symfony\Component\Validator\Constraints\Length;
@@ -15,6 +16,11 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 class Category
 {
+    public function __construct()
+    {
+        $this->posts = new ArrayCollection();
+    }
+
     /**
      * @var int
      *
@@ -44,6 +50,17 @@ class Category
      * @Field(type="TextareaType")
      */
     private $description;
+
+    /**
+     * @var ArrayCollection<Post>
+     *
+     * @ORM\ManyToMany(
+     *     targetEntity="Nacat\DataBundle\Entity\Post",
+     *     mappedBy="categories"
+     * )
+     * @Field
+     */
+    private $posts;
 
 
     /**
@@ -103,5 +120,28 @@ class Category
     {
         return $this->description;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
+     * @param ArrayCollection $posts
+     */
+    public function setPosts(ArrayCollection $posts)
+    {
+        $this->posts = $posts;
+    }
+
+    public function hasPost(Post $post)
+    {
+        return $this->posts->contains($post);
+    }
+
+
 }
 

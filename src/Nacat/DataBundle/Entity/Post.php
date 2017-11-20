@@ -2,6 +2,7 @@
 
 namespace Nacat\DataBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Solazs\QuReP\ApiBundle\Annotations\Entity\Field;
 use Symfony\Component\Validator\Constraints\Length;
@@ -15,6 +16,12 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 class Post
 {
+
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
+
     /**
      * @var int
      *
@@ -87,6 +94,29 @@ class Post
      * })
      */
     private $disableDate;
+
+    /**
+     * @var ArrayCollection<Editor>
+     *
+     * @ORM\ManyToMany(
+     *     targetEntity="Nacat\DataBundle\Entity\Category",
+     *     inversedBy="posts"
+     * )
+     * @Field
+     */
+    private $categories;
+
+    /**
+     * @var Editor
+     *
+     * @ORM\ManyToOne(
+     *     targetEntity="Nacat\DataBundle\Entity\Editor",
+     *     inversedBy="posts"
+     * )
+     * @ORM\JoinColumn(name="editor_id", referencedColumnName="id", nullable=false)
+     * @Field
+     */
+    private $editor;
 
 
     /**
@@ -234,5 +264,43 @@ class Post
     {
         return $this->disableDate;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * @param ArrayCollection $categories
+     */
+    public function setCategories(ArrayCollection $categories)
+    {
+        $this->categories = $categories;
+    }
+
+    public function hasCategory(Category $category)
+    {
+        return $this->categories->contains($category);
+    }
+
+    /**
+     * @return Editor
+     */
+    public function getEditor()
+    {
+        return $this->editor;
+    }
+
+    /**
+     * @param Editor $editor
+     */
+    public function setEditor(Editor $editor)
+    {
+        $this->editor = $editor;
+    }
+
 }
 

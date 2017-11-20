@@ -2,6 +2,7 @@
 
 namespace Nacat\DataBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User;
 use Solazs\QuReP\ApiBundle\Annotations\Entity\Field;
@@ -16,6 +17,12 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 class Editor extends User
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->posts = new ArrayCollection();
+    }
+
     /**
      * @var int
      *
@@ -53,6 +60,17 @@ class Editor extends User
     private $name;
 
     /**
+     * @var ArrayCollection<Post>
+     *
+     * @ORM\OneToMany(
+     *     targetEntity="Nacat\DataBundle\Entity\Post",
+     *     mappedBy="editor"
+     * )
+     * @Field
+     */
+    private $posts;
+
+    /**
      * Set name
      *
      * @param string $name
@@ -74,6 +92,27 @@ class Editor extends User
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
+     * @param ArrayCollection $posts
+     */
+    public function setPosts(ArrayCollection $posts)
+    {
+        $this->posts = $posts;
+    }
+
+    public function hasPost(Post $post)
+    {
+        return $this->posts->contains($post);
     }
 }
 
