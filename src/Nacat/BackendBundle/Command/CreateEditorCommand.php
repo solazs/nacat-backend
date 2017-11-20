@@ -98,7 +98,7 @@ EOT
         $questions = array();
 
         if (!$input->getArgument('username')) {
-            $question = new Question('Please choose a username:');
+            $question = new Question('Please choose a username: ');
             $question->setValidator(function ($username) {
                 if (empty($username)) {
                     throw new \Exception('Username can not be empty');
@@ -110,7 +110,7 @@ EOT
         }
 
         if (!$input->getArgument('name')) {
-            $question = new Question('Please provide a name:');
+            $question = new Question('Please provide a name: ');
             $question->setValidator(function ($name) {
                 if (empty($name)) {
                     throw new \Exception('Name can not be empty');
@@ -122,7 +122,7 @@ EOT
         }
 
         if (!$input->getArgument('email')) {
-            $question = new Question('Please choose an email:');
+            $question = new Question('Please choose an email: ');
             $question->setValidator(function ($email) {
                 if (empty($email)) {
                     throw new \Exception('Email can not be empty');
@@ -134,7 +134,7 @@ EOT
         }
 
         if (!$input->getArgument('password')) {
-            $question = new Question('Please choose a password:');
+            $question = new Question('Please choose a password: ');
             $question->setValidator(function ($password) {
                 if (empty($password)) {
                     throw new \Exception('Password can not be empty');
