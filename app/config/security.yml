@@ -22,8 +22,28 @@ security:
             logout:       true
             anonymous:    true
 
+        login:
+                    pattern:  ^/api/v1/login
+                    stateless: true
+                    anonymous: true
+                    form_login:
+                        check_path:               /api/v1/login_check
+                        success_handler:          lexik_jwt_authentication.handler.authentication_success
+                        failure_handler:          lexik_jwt_authentication.handler.authentication_failure
+                        require_previous_session: false
+
+        api:
+            pattern:   ^/api
+            methods: [POST, DELETE, PUT]
+            stateless: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: ROLE_ADMIN }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api/v1, methods: [POST, DELETE, PUT], role: ROLE_ADMIN }
+        - { path: ^/api/v1/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/v1, methods: [GET], roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/v1, methods: [POST, DELETE, PUT], role: IS_AUTHENTICATED_FULLY }

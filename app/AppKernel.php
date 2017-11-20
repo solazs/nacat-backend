@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Solazs\QuReP\ApiBundle\QuRePApiBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
             new Nacat\BackendBundle\NacatBackendBundle(),
         ];
 
