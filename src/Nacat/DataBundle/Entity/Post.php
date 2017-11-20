@@ -57,10 +57,22 @@ class Post
     private $content;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="isFrontPage", type="boolean", nullable=false)
+     * @Field(type="CheckboxType")
+     */
+    private $isFrontPage = false;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="activationDate", type="datetime")
-     * @Field(type="DateTimeType")
+     * @Field(type="DateTimeType", options={
+     *     "widget"="single_text",
+     *     "input"="datetime",
+     *     "format"="yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+     * })
      */
     private $activationDate;
 
@@ -68,7 +80,11 @@ class Post
      * @var \DateTime
      *
      * @ORM\Column(name="activeUntil", type="datetime", nullable=true)
-     * @Field(type="DateTimeType")
+     * @Field(type="DateTimeType", options={
+     *     "widget"="single_text",
+     *     "input"="datetime",
+     *     "format"="yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+     * })
      */
     private $disableDate;
 
@@ -153,6 +169,22 @@ class Post
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFrontPage()
+    {
+        return $this->isFrontPage;
+    }
+
+    /**
+     * @param bool $isFrontPage
+     */
+    public function setFrontPage($isFrontPage = true)
+    {
+        $this->isFrontPage = $isFrontPage;
     }
 
     /**
