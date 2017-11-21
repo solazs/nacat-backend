@@ -60,7 +60,7 @@ class NacatUserController extends Controller
         }
         if (array_key_exists('password', $params)) {
             $params['plainPassword'] = ['first' => $params['password'], 'second' => $params['password']];
-            unset($params['plainPassword']);
+            unset($params['password']);
         }
         $form = $this->createForm(RegistrationType::class, $user);
         $form->submit($params, false);
