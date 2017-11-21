@@ -28,7 +28,7 @@ class NacatUserController extends Controller
         $userManager = $this->container->get('fos_user.user_manager');
         /** @var \Nacat\DataBundle\Entity\Editor $user */
         $user = $userManager->createUser();
-        return $this->handleForm($user, $request);
+        return $this->handleForm($user, $request, $userManager);
     }
 
     /**
@@ -48,10 +48,10 @@ class NacatUserController extends Controller
         if (!$user) {
             throw new NotFoundHttpException('User not found.');
         }
-        return $this->handleForm($user, $request);
+        return $this->handleForm($user, $request, $userManager);
     }
 
-    private function handleForm(Editor $user, Request $request)
+    private function handleForm(Editor $user, Request $request, $userManager)
     {
         $data = $request->getContent();
         $params = json_decode($data, true);
@@ -59,7 +59,7 @@ class NacatUserController extends Controller
             throw new BadRequestHttpException('Invalid JSON or null content.');
         }
         if (array_key_exists('password', $params)) {
-            $params['plainPassword'] = $params['password'];
+            $params['plainPassword'] = ['first' => $params['password'], 'second' => $params['password']];
             unset($params['plainPassword']);
         }
         $form = $this->createForm(RegistrationType::class, $user);
