@@ -79,6 +79,12 @@ class NacatUserController extends Controller
               ["data" => $user, "meta" => []],
               "json"
             );
+            unset($jsonData['data']['password']);
+            unset($jsonData['data']['posts']);
+            unset($jsonData['data']['roles']);
+            unset($jsonData['data']['enabled']);
+            unset($jsonData['data']['email_canonical']);
+            unset($jsonData['data']['username_canonical']);
             $response->setContent($jsonData);
             return $response;
         } else {
