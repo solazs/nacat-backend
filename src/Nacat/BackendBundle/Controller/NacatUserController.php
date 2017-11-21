@@ -67,7 +67,7 @@ class NacatUserController extends Controller
         if ($form->isValid()) {
             $user = $form->getData();
             if (array_key_exists('plainPassword', $params)){
-                $user->setPlainPassword($params['plainPassword']);
+                $user->setPlainPassword($params['plainPassword']['first']);
             }
             $user->setEnabled(true);
             $userManager->updateUser($user, true);
