@@ -1,10 +1,9 @@
-qurep:
-    resource: "@NacatBackendBundle/Controller/"
-    type:     annotation
-    prefix:   /api/v1/
-
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
 api_login_check:
     path: /api/v1/login_check
+
+nacat_backend:
+    resource: "@NacatBackendBundle/Resources/config/routing.yml"
+    prefix:   /api/v1/

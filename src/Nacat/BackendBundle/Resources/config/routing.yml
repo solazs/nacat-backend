@@ -1,0 +1,6 @@
+nacat_users:
+    resource: "@NacatBackendBundle/Controller/NacatUserController.php"
+    type:     annotation
+nacat_qurep:
+    resource: "@NacatBackendBundle/Controller/NacatApiController.php"
+    type:     annotation
