@@ -2108,12 +2108,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/solazs/qurep.git",
-                "reference": "40f238fc02d7b9433d5a9e9f180f7ed2350b602d"
+                "reference": "790eb954986f42d8745df6f8e38ee06390bee3d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/solazs/qurep/zipball/40f238fc02d7b9433d5a9e9f180f7ed2350b602d",
-                "reference": "40f238fc02d7b9433d5a9e9f180f7ed2350b602d",
+                "url": "https://api.github.com/repos/solazs/qurep/zipball/790eb954986f42d8745df6f8e38ee06390bee3d2",
+                "reference": "790eb954986f42d8745df6f8e38ee06390bee3d2",
                 "shasum": ""
             },
             "require": {
@@ -2145,7 +2145,7 @@
                 "source": "https://github.com/solazs/qurep/tree/master",
                 "issues": "https://github.com/solazs/qurep/issues"
             },
-            "time": "2017-11-21T16:11:32+00:00"
+            "time": "2017-11-21T18:59:58+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
