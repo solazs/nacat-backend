@@ -3,6 +3,7 @@
 namespace Nacat\BackendBundle\Controller;
 
 
+use FOS\UserBundle\Model\UserManagerInterface;
 use Nacat\BackendBundle\Form\RegistrationType;
 use Nacat\DataBundle\Entity\Editor;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -28,6 +29,7 @@ class NacatUserController extends Controller
         $userManager = $this->container->get('fos_user.user_manager');
         /** @var \Nacat\DataBundle\Entity\Editor $user */
         $user = $userManager->createUser();
+
         return $this->handleForm($user, $request, $userManager);
     }
 
@@ -48,14 +50,15 @@ class NacatUserController extends Controller
         if (!$user) {
             throw new NotFoundHttpException('User not found.');
         }
+
         return $this->handleForm($user, $request, $userManager);
     }
 
-    private function handleForm(Editor $user, Request $request, $userManager)
+    private function handleForm(Editor $user, Request $request, UserManagerInterface $userManager)
     {
         $data = $request->getContent();
         $params = json_decode($data, true);
-        if (!$params || !is_array($params)){
+        if (!$params || !is_array($params)) {
             throw new BadRequestHttpException('Invalid JSON or null content.');
         }
         if (array_key_exists('password', $params)) {
@@ -65,8 +68,9 @@ class NacatUserController extends Controller
         $form = $this->createForm(RegistrationType::class, $user);
         $form->submit($params, false);
         if ($form->isValid()) {
+            /** @var Editor $user */
             $user = $form->getData();
-            if (array_key_exists('plainPassword', $params)){
+            if (array_key_exists('plainPassword', $params)) {
                 $user->setPlainPassword($params['plainPassword']['first']);
             }
             $user->setEnabled(true);
@@ -75,17 +79,18 @@ class NacatUserController extends Controller
             $response->headers->set('Content-type', 'application/json');
             $response->setStatusCode(201);
             $serializer = $this->get('jms_serializer');
+            $userData = [
+              'id'       => $user->getId(),
+              'name'     => $user->getName(),
+              'username' => $user->getUsername(),
+              'email'    => $user->getEmail(),
+            ];
             $jsonData = $serializer->serialize(
-              ["data" => $user, "meta" => []],
+              ["data" => $userData, "meta" => []],
               "json"
             );
-            unset($jsonData['data']['password']);
-            unset($jsonData['data']['posts']);
-            unset($jsonData['data']['roles']);
-            unset($jsonData['data']['enabled']);
-            unset($jsonData['data']['email_canonical']);
-            unset($jsonData['data']['username_canonical']);
             $response->setContent($jsonData);
+
             return $response;
         } else {
             $response = new Response();
@@ -97,6 +102,7 @@ class NacatUserController extends Controller
               "json"
             );
             $response->setContent($jsonData);
+
             return $response;
         }
     }
