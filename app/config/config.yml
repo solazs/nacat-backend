@@ -87,3 +87,11 @@ lexik_jwt_authentication:
 
 qurep_api:
     entities: "%qurep_entities%"
+
+nelmio_cors:
+    paths:
+        '^/api/':
+            allow_origin: ['*']
+            allow_headers: ['*']
+            allow_methods: ['POST', 'GET', 'DELETE']
+            max_age: 3600
