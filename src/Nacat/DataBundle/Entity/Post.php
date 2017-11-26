@@ -35,7 +35,7 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255, nullable=false)
      * @NotBlank()
      * @Length(min="3", max="255",
      *     minMessage="Title must be at least 3 characters long",
@@ -59,6 +59,7 @@ class Post
      * @var string
      *
      * @ORM\Column(name="content", type="text")
+     * @NotBlank()
      * @Field(type="TextareaType")
      */
     private $content;
@@ -75,6 +76,7 @@ class Post
      * @var \DateTime
      *
      * @ORM\Column(name="activationDate", type="datetime")
+     * @NotBlank()
      * @Field(type="DateTimeType", options={
      *     "widget"="single_text",
      *     "input"="datetime",
@@ -114,6 +116,7 @@ class Post
      *     inversedBy="posts"
      * )
      * @ORM\JoinColumn(name="editor_id", referencedColumnName="id", nullable=false)
+     * @NotBlank(message="Please provide the editor of the post in editor: <ID> format!")
      * @Field
      */
     private $editor;
