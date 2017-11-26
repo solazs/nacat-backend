@@ -66,10 +66,10 @@ class Post
     /**
      * @var boolean
      *
-     * @ORM\Column(name="isFrontPage", type="boolean", nullable=false)
+     * @ORM\Column(name="frontPage", type="boolean", nullable=false)
      * @Field(type="CheckboxType")
      */
-    private $isFrontPage = false;
+    private $frontPage = false;
 
     /**
      * @var \DateTime
@@ -206,7 +206,15 @@ class Post
      */
     public function isFrontPage()
     {
-        return $this->isFrontPage;
+        return $this->frontPage;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getFrontPage()
+    {
+        return $this->frontPage;
     }
 
     /**
@@ -214,7 +222,7 @@ class Post
      */
     public function setFrontPage($isFrontPage = true)
     {
-        $this->isFrontPage = $isFrontPage;
+        $this->frontPage = $isFrontPage;
     }
 
     /**
